@@ -1,2 +1,5 @@
 # Hiden node_modules
 node_modules
+
+# Hide DB Information
+.env
