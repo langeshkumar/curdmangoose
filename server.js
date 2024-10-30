@@ -1,12 +1,14 @@
 import express from "express";
 import router from "./Router/crud.router.js";
-// import dbConnection from "./lib/dataBase.js";
+import dbConnection from "./lib/dataBase.js";
 
 const app = express();
 const PORT = "8080";
 
+app.use(express.json());
+
 // calling mangoose database
-// dbConnection();
+dbConnection();
 
 // sample route and controller 
 app.get("/", (req, res) => {
