@@ -27,7 +27,7 @@ export const crudCreate = async (req, res) => {
         const successmsg = await crudInsert.save();
 
         res.status(201).json({
-            message: "Data Dave Successfully..!",
+            message: "Data Save Successfully..!",
             data: successmsg
         });
     } catch (error) {
