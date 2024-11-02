@@ -1,18 +1,9 @@
+import { json } from "express";
 import crudmodel from "../Model/crud.model.js";
 
 export const crusRead = async (req, res) => {
     try {
-        const { name, age } = req.body;
-
-        if (!name && !age) {
-            res.status(401).json({ message: "Atleast one data required..!" });
-        }
-
-        const query = {};
-        if (name) query.name = name;
-        if (age) query.age = age;
-
-        const getCrudData = await crudmodel.find(query);
+        const getCrudData = await crudmodel.find();
 
         res.json(getCrudData);
 
@@ -47,10 +38,41 @@ export const crudCreate = async (req, res) => {
     }
 };
 
-export const crudUpdate = (req, res) => {
-    res.send({ msg: "This is update..!" });
+export const crudUpdate = async (req, res) => {
+    try {
+        const updateId = req.params.id;
+        const { name, age, description } = req.body;
+
+        const crudUpdate = await crudmodel.findOneAndUpdate({ _id: updateId }, {
+            name: name,
+            age: age,
+            description: description
+        }, { new: true });
+
+        res.status(201).json({
+            message: "Data Upadted Successfully..!",
+            data: crudUpdate
+        });
+    } catch (error) {
+        res.status(401).json({
+            message: "Some thing went wrong..!",
+            error: error.message
+        });
+    }
 };
 
-export const crudDelete = (req, res) => {
-    res.send({ msg: "This is delete..!" });
+export const crudDelete = async (req, res) => {
+    try {
+        const deleteId = req.params.id;
+
+        const deleteData = await crudmodel.findOneAndDelete({ _id: deleteId });
+        res.status(201).json({
+            message: "Data Deleted Successfully..!",
+            data: deleteData
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Some think went wrong..!"
+        });
+    }
 };
