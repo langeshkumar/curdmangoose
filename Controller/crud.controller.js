@@ -1,7 +1,7 @@
 import { json } from "express";
 import crudmodel from "../Model/crud.model.js";
 
-export const crusRead = async (req, res) => {
+export const crudRead = async (req, res) => {
     try {
         const getCrudData = await crudmodel.find();
 

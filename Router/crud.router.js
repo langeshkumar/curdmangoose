@@ -1,12 +1,12 @@
 import express from "express";
-import { crudCreate, crudDelete, crudUpdate, crusRead } from "../Controller/crud.controller.js";
+import { crudCreate, crudDelete, crudUpdate, crudRead } from "../Controller/crud.controller.js";
 
 const router = express.Router();
 
 // crud operations 
 
 // crud Read process 
-router.get('/', crusRead);
+router.get('/', crudRead);
 
 // crud create process 
 router.post('/', crudCreate);
